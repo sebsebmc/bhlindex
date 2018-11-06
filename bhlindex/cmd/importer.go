@@ -18,15 +18,15 @@ import (
 	"log"
 	"os"
 
-	"github.com/gnames/bhlindex/server"
+	"github.com/sebsebmc/bhlindex/importer"
 	"github.com/spf13/cobra"
 )
 
 // serverCmd represents the server command
 var serverCmd = &cobra.Command{
-	Use:   "server",
-	Short: "Runs the gRPC server",
-	Long: `Creates a gRPC server on a specified port.
+	Use:   "importer",
+	Short: "Runs gRPC import server",
+	Long: `Creates a gRPC import server on a specified port.
 `,
 	Run: func(cmd *cobra.Command, args []string) {
 		port, err := cmd.Flags().GetInt("port")
@@ -36,7 +36,7 @@ var serverCmd = &cobra.Command{
 		}
 		log.Printf("Starting gRPC server on %d port", port)
 
-		server.Serve(port, buildVersion)
+		server.Serve(port)
 	},
 }
 
@@ -52,5 +52,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// serverCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	serverCmd.Flags().IntP("port", "p", 8888, "port for gRPC service")
+	serverCmd.Flags().IntP("port", "p", 8889, "port for gRPC service")
 }

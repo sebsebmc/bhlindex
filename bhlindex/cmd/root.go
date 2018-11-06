@@ -39,10 +39,10 @@ var (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "bhlindex",
-	Short: "bhlindex finds and verifies scientific names in BHL.",
+	Short: "bhlindex finds and verifies scientific names in BHL. *",
 	Long: `bhlindex is a tool for finding and verifying scientific names in
 Biodiversity Heritage Library. A directory organized according to BHL
-practices is required for the program to work.`,
+practices is required for the program to work.*`,
 	Run: func(cmd *cobra.Command, args []string) {
 		version, err := cmd.Flags().GetBool("version")
 		if err != nil {
