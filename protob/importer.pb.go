@@ -22,19 +22,184 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-type PageData struct {
-	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	JsonData             string   `protobuf:"bytes,2,opt,name=jsonData,proto3" json:"jsonData,omitempty"`
+type ColumnName struct {
+	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ColumnName) Reset()         { *m = ColumnName{} }
+func (m *ColumnName) String() string { return proto.CompactTextString(m) }
+func (*ColumnName) ProtoMessage()    {}
+func (*ColumnName) Descriptor() ([]byte, []int) {
+	return fileDescriptor_394990ff89e0d02b, []int{0}
+}
+
+func (m *ColumnName) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ColumnName.Unmarshal(m, b)
+}
+func (m *ColumnName) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ColumnName.Marshal(b, m, deterministic)
+}
+func (m *ColumnName) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ColumnName.Merge(m, src)
+}
+func (m *ColumnName) XXX_Size() int {
+	return xxx_messageInfo_ColumnName.Size(m)
+}
+func (m *ColumnName) XXX_DiscardUnknown() {
+	xxx_messageInfo_ColumnName.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ColumnName proto.InternalMessageInfo
+
+func (m *ColumnName) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+type ColumnId struct {
+	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ColumnId) Reset()         { *m = ColumnId{} }
+func (m *ColumnId) String() string { return proto.CompactTextString(m) }
+func (*ColumnId) ProtoMessage()    {}
+func (*ColumnId) Descriptor() ([]byte, []int) {
+	return fileDescriptor_394990ff89e0d02b, []int{1}
+}
+
+func (m *ColumnId) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ColumnId.Unmarshal(m, b)
+}
+func (m *ColumnId) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ColumnId.Marshal(b, m, deterministic)
+}
+func (m *ColumnId) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ColumnId.Merge(m, src)
+}
+func (m *ColumnId) XXX_Size() int {
+	return xxx_messageInfo_ColumnId.Size(m)
+}
+func (m *ColumnId) XXX_DiscardUnknown() {
+	xxx_messageInfo_ColumnId.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ColumnId proto.InternalMessageInfo
+
+func (m *ColumnId) GetId() int32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+type ColumnList struct {
+	Columns              []*ColumnList_ColumnInfo `protobuf:"bytes,1,rep,name=columns,proto3" json:"columns,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
+	XXX_unrecognized     []byte                   `json:"-"`
+	XXX_sizecache        int32                    `json:"-"`
+}
+
+func (m *ColumnList) Reset()         { *m = ColumnList{} }
+func (m *ColumnList) String() string { return proto.CompactTextString(m) }
+func (*ColumnList) ProtoMessage()    {}
+func (*ColumnList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_394990ff89e0d02b, []int{2}
+}
+
+func (m *ColumnList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ColumnList.Unmarshal(m, b)
+}
+func (m *ColumnList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ColumnList.Marshal(b, m, deterministic)
+}
+func (m *ColumnList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ColumnList.Merge(m, src)
+}
+func (m *ColumnList) XXX_Size() int {
+	return xxx_messageInfo_ColumnList.Size(m)
+}
+func (m *ColumnList) XXX_DiscardUnknown() {
+	xxx_messageInfo_ColumnList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ColumnList proto.InternalMessageInfo
+
+func (m *ColumnList) GetColumns() []*ColumnList_ColumnInfo {
+	if m != nil {
+		return m.Columns
+	}
+	return nil
+}
+
+type ColumnList_ColumnInfo struct {
+	Id                   *ColumnId   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 *ColumnName `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
+}
+
+func (m *ColumnList_ColumnInfo) Reset()         { *m = ColumnList_ColumnInfo{} }
+func (m *ColumnList_ColumnInfo) String() string { return proto.CompactTextString(m) }
+func (*ColumnList_ColumnInfo) ProtoMessage()    {}
+func (*ColumnList_ColumnInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_394990ff89e0d02b, []int{2, 0}
+}
+
+func (m *ColumnList_ColumnInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ColumnList_ColumnInfo.Unmarshal(m, b)
+}
+func (m *ColumnList_ColumnInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ColumnList_ColumnInfo.Marshal(b, m, deterministic)
+}
+func (m *ColumnList_ColumnInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ColumnList_ColumnInfo.Merge(m, src)
+}
+func (m *ColumnList_ColumnInfo) XXX_Size() int {
+	return xxx_messageInfo_ColumnList_ColumnInfo.Size(m)
+}
+func (m *ColumnList_ColumnInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_ColumnList_ColumnInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ColumnList_ColumnInfo proto.InternalMessageInfo
+
+func (m *ColumnList_ColumnInfo) GetId() *ColumnId {
+	if m != nil {
+		return m.Id
+	}
+	return nil
+}
+
+func (m *ColumnList_ColumnInfo) GetName() *ColumnName {
+	if m != nil {
+		return m.Name
+	}
+	return nil
+}
+
+type PageData struct {
+	Id                   string    `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	JsonData             string    `protobuf:"bytes,2,opt,name=jsonData,proto3" json:"jsonData,omitempty"`
+	Col                  *ColumnId `protobuf:"bytes,3,opt,name=col,proto3" json:"col,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *PageData) Reset()         { *m = PageData{} }
 func (m *PageData) String() string { return proto.CompactTextString(m) }
 func (*PageData) ProtoMessage()    {}
 func (*PageData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_394990ff89e0d02b, []int{0}
+	return fileDescriptor_394990ff89e0d02b, []int{3}
 }
 
 func (m *PageData) XXX_Unmarshal(b []byte) error {
@@ -69,19 +234,27 @@ func (m *PageData) GetJsonData() string {
 	return ""
 }
 
+func (m *PageData) GetCol() *ColumnId {
+	if m != nil {
+		return m.Col
+	}
+	return nil
+}
+
 type TitleData struct {
-	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	JsonData             int32    `protobuf:"varint,2,opt,name=jsonData,proto3" json:"jsonData,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Id                   int32     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	JsonData             int32     `protobuf:"varint,2,opt,name=jsonData,proto3" json:"jsonData,omitempty"`
+	Col                  *ColumnId `protobuf:"bytes,3,opt,name=col,proto3" json:"col,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *TitleData) Reset()         { *m = TitleData{} }
 func (m *TitleData) String() string { return proto.CompactTextString(m) }
 func (*TitleData) ProtoMessage()    {}
 func (*TitleData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_394990ff89e0d02b, []int{1}
+	return fileDescriptor_394990ff89e0d02b, []int{4}
 }
 
 func (m *TitleData) XXX_Unmarshal(b []byte) error {
@@ -116,20 +289,28 @@ func (m *TitleData) GetJsonData() int32 {
 	return 0
 }
 
+func (m *TitleData) GetCol() *ColumnId {
+	if m != nil {
+		return m.Col
+	}
+	return nil
+}
+
 type PageNameData struct {
-	PageId               string   `protobuf:"bytes,1,opt,name=pageId,proto3" json:"pageId,omitempty"`
-	NameStart            int32    `protobuf:"varint,2,opt,name=name_start,json=nameStart,proto3" json:"name_start,omitempty"`
-	JsonData             string   `protobuf:"bytes,3,opt,name=jsonData,proto3" json:"jsonData,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	PageId               string    `protobuf:"bytes,1,opt,name=pageId,proto3" json:"pageId,omitempty"`
+	NameStart            int32     `protobuf:"varint,2,opt,name=name_start,json=nameStart,proto3" json:"name_start,omitempty"`
+	JsonData             string    `protobuf:"bytes,3,opt,name=jsonData,proto3" json:"jsonData,omitempty"`
+	Col                  *ColumnId `protobuf:"bytes,4,opt,name=col,proto3" json:"col,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *PageNameData) Reset()         { *m = PageNameData{} }
 func (m *PageNameData) String() string { return proto.CompactTextString(m) }
 func (*PageNameData) ProtoMessage()    {}
 func (*PageNameData) Descriptor() ([]byte, []int) {
-	return fileDescriptor_394990ff89e0d02b, []int{2}
+	return fileDescriptor_394990ff89e0d02b, []int{5}
 }
 
 func (m *PageNameData) XXX_Unmarshal(b []byte) error {
@@ -171,6 +352,13 @@ func (m *PageNameData) GetJsonData() string {
 	return ""
 }
 
+func (m *PageNameData) GetCol() *ColumnId {
+	if m != nil {
+		return m.Col
+	}
+	return nil
+}
+
 type Success struct {
 	Successful           bool     `protobuf:"varint,1,opt,name=successful,proto3" json:"successful,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -182,7 +370,7 @@ func (m *Success) Reset()         { *m = Success{} }
 func (m *Success) String() string { return proto.CompactTextString(m) }
 func (*Success) ProtoMessage()    {}
 func (*Success) Descriptor() ([]byte, []int) {
-	return fileDescriptor_394990ff89e0d02b, []int{3}
+	return fileDescriptor_394990ff89e0d02b, []int{6}
 }
 
 func (m *Success) XXX_Unmarshal(b []byte) error {
@@ -211,6 +399,10 @@ func (m *Success) GetSuccessful() bool {
 }
 
 func init() {
+	proto.RegisterType((*ColumnName)(nil), "ColumnName")
+	proto.RegisterType((*ColumnId)(nil), "ColumnId")
+	proto.RegisterType((*ColumnList)(nil), "ColumnList")
+	proto.RegisterType((*ColumnList_ColumnInfo)(nil), "ColumnList.ColumnInfo")
 	proto.RegisterType((*PageData)(nil), "PageData")
 	proto.RegisterType((*TitleData)(nil), "TitleData")
 	proto.RegisterType((*PageNameData)(nil), "PageNameData")
@@ -220,23 +412,33 @@ func init() {
 func init() { proto.RegisterFile("importer.proto", fileDescriptor_394990ff89e0d02b) }
 
 var fileDescriptor_394990ff89e0d02b = []byte{
-	// 248 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0xcc, 0x2d, 0xc8,
-	0x2f, 0x2a, 0x49, 0x2d, 0xd2, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x57, 0x32, 0xe3, 0xe2, 0x08, 0x48,
-	0x4c, 0x4f, 0x75, 0x49, 0x2c, 0x49, 0x14, 0xe2, 0xe3, 0x62, 0xca, 0x4c, 0x91, 0x60, 0x54, 0x60,
-	0xd4, 0xe0, 0x0c, 0x62, 0xca, 0x4c, 0x11, 0x92, 0xe2, 0xe2, 0xc8, 0x2a, 0xce, 0xcf, 0x03, 0xc9,
-	0x49, 0x30, 0x81, 0x45, 0xe1, 0x7c, 0x25, 0x73, 0x2e, 0xce, 0x90, 0xcc, 0x92, 0x1c, 0x74, 0x8d,
-	0xac, 0x58, 0x35, 0xb2, 0x22, 0x69, 0x4c, 0xe4, 0xe2, 0x01, 0x59, 0xe8, 0x97, 0x98, 0x0b, 0xd1,
-	0x2b, 0xc6, 0xc5, 0x56, 0x90, 0x98, 0x9e, 0xea, 0x09, 0xb3, 0x18, 0xca, 0x13, 0x92, 0xe5, 0xe2,
-	0xca, 0x4b, 0xcc, 0x4d, 0x8d, 0x2f, 0x2e, 0x49, 0x2c, 0x2a, 0x81, 0x9a, 0xc2, 0x09, 0x12, 0x09,
-	0x06, 0x09, 0xa0, 0x58, 0xc1, 0x8c, 0xe6, 0x36, 0x4d, 0x2e, 0xf6, 0xe0, 0xd2, 0xe4, 0xe4, 0xd4,
-	0xe2, 0x62, 0x21, 0x39, 0x2e, 0xae, 0x62, 0x08, 0x33, 0xad, 0x34, 0x07, 0x6c, 0x03, 0x47, 0x10,
-	0x92, 0x88, 0xd1, 0x54, 0x46, 0x2e, 0x0e, 0x4f, 0x68, 0x88, 0x08, 0x69, 0x72, 0xf1, 0x65, 0xe6,
-	0xa5, 0xa7, 0x16, 0x97, 0xc0, 0x43, 0x84, 0x53, 0x0f, 0xc6, 0x94, 0xe2, 0xd0, 0x83, 0x9a, 0xa9,
-	0xc4, 0xa0, 0xc1, 0x28, 0xa4, 0xcd, 0xc5, 0x0f, 0x51, 0x8a, 0x08, 0x04, 0x2e, 0x3d, 0x38, 0x1b,
-	0x4d, 0xb1, 0x21, 0x97, 0x10, 0xc2, 0x5c, 0xb8, 0xc7, 0x79, 0xf5, 0x90, 0xb9, 0xa8, 0x5a, 0x9c,
-	0x38, 0xa2, 0xd8, 0xc0, 0xf1, 0x93, 0x94, 0x04, 0xa1, 0x8d, 0x01, 0x01, 0x00, 0x00, 0xff, 0xff,
-	0x21, 0x85, 0x92, 0xad, 0xb9, 0x01, 0x00, 0x00,
+	// 412 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x52, 0x4d, 0xab, 0xd3, 0x40,
+	0x14, 0x6d, 0x92, 0x7e, 0x24, 0x37, 0xb5, 0xca, 0x2c, 0x4a, 0x8d, 0xa8, 0x25, 0xab, 0x16, 0x65,
+	0xd0, 0xfa, 0x0f, 0xaa, 0x0b, 0x03, 0x52, 0x24, 0x2d, 0x2e, 0xdc, 0x48, 0x9a, 0x4c, 0x43, 0x24,
+	0xc9, 0xd4, 0xcc, 0x04, 0x71, 0xe3, 0xfa, 0xfd, 0x87, 0xf7, 0x67, 0x1f, 0xf3, 0x91, 0x8f, 0x96,
+	0xf2, 0x78, 0xab, 0xb9, 0xf7, 0xce, 0xb9, 0xe7, 0x9c, 0xcb, 0xbd, 0x30, 0xcb, 0x8a, 0x33, 0xad,
+	0x38, 0xa9, 0xf0, 0xb9, 0xa2, 0x9c, 0x7a, 0x53, 0xf9, 0x1c, 0x55, 0xe6, 0x2f, 0x01, 0x3e, 0xd3,
+	0xbc, 0x2e, 0xca, 0x5d, 0x54, 0x10, 0x84, 0x60, 0x58, 0x46, 0x05, 0x59, 0x18, 0x4b, 0x63, 0xe5,
+	0x84, 0x32, 0xf6, 0x3d, 0xb0, 0x15, 0x22, 0x48, 0xd0, 0x0c, 0xcc, 0x2c, 0x91, 0xbf, 0xa3, 0xd0,
+	0xcc, 0x12, 0xff, 0xce, 0x68, 0xda, 0xbf, 0x65, 0x8c, 0xa3, 0x0f, 0x30, 0x89, 0x65, 0xc6, 0x16,
+	0xc6, 0xd2, 0x5a, 0xb9, 0x9b, 0x39, 0xee, 0x7e, 0x75, 0x18, 0x94, 0x27, 0x1a, 0x36, 0x30, 0xef,
+	0x6b, 0xd3, 0x2f, 0xca, 0xe8, 0x65, 0x4b, 0xef, 0x6e, 0x9c, 0x06, 0x9f, 0x08, 0x25, 0xf4, 0x56,
+	0x3b, 0x33, 0xe5, 0xa7, 0x8b, 0x3b, 0xd3, 0xda, 0xe6, 0x1e, 0xec, 0xef, 0x51, 0x4a, 0xbe, 0x44,
+	0x3c, 0xea, 0xd9, 0x74, 0x64, 0xb3, 0x07, 0xf6, 0x6f, 0x46, 0x4b, 0xf1, 0x27, 0x09, 0x9c, 0xb0,
+	0xcd, 0xd1, 0x2b, 0xb0, 0x62, 0x9a, 0x2f, 0xac, 0x6b, 0x51, 0x51, 0xf5, 0x0f, 0xe0, 0x1c, 0x32,
+	0x9e, 0x5f, 0xb3, 0x8e, 0x6e, 0xb2, 0x8e, 0x9e, 0xca, 0xfa, 0x1f, 0xa6, 0xc2, 0xaa, 0x30, 0x2f,
+	0xc1, 0x73, 0x18, 0x9f, 0xa3, 0x94, 0x04, 0x8d, 0x65, 0x9d, 0xa1, 0xd7, 0x00, 0x62, 0xb4, 0x5f,
+	0x8c, 0x47, 0x15, 0xd7, 0x12, 0x8e, 0xa8, 0xec, 0x45, 0xe1, 0x42, 0xdf, 0xba, 0x3d, 0xd5, 0xf0,
+	0xa6, 0xfe, 0x1a, 0x26, 0xfb, 0x3a, 0x8e, 0x09, 0x63, 0xe8, 0x0d, 0x00, 0x53, 0xe1, 0xa9, 0xce,
+	0xa5, 0xbc, 0x1d, 0xf6, 0x2a, 0x9b, 0x7b, 0x13, 0xec, 0x40, 0xdf, 0x0f, 0x7a, 0x0f, 0x2f, 0x2a,
+	0xf2, 0xa7, 0x26, 0x8c, 0xef, 0xc8, 0x5f, 0x45, 0x89, 0xfa, 0x9b, 0xf0, 0x3a, 0x21, 0x7f, 0x80,
+	0xd6, 0x00, 0x29, 0xe1, 0xaa, 0xc0, 0xd0, 0x14, 0xeb, 0xb3, 0xfb, 0x41, 0xb3, 0xc4, 0x73, 0x7b,
+	0x77, 0xe1, 0x0f, 0xd0, 0x3b, 0x78, 0xde, 0x42, 0xb7, 0xff, 0xe4, 0x25, 0x3e, 0xc6, 0x3b, 0xcb,
+	0xca, 0x94, 0x30, 0xde, 0xae, 0xdb, 0xc1, 0x4d, 0xe8, 0xd9, 0x58, 0x4f, 0xe6, 0x0f, 0x56, 0x86,
+	0xe0, 0x55, 0xd0, 0x6e, 0x89, 0x80, 0xdb, 0xf8, 0x0a, 0xfc, 0x11, 0x50, 0xc7, 0xdb, 0xee, 0xe6,
+	0x19, 0xee, 0xa7, 0x97, 0x2d, 0x5b, 0xfb, 0xe7, 0x58, 0x4d, 0x75, 0x54, 0xef, 0xa7, 0x87, 0x00,
+	0x00, 0x00, 0xff, 0xff, 0xbd, 0x09, 0x6d, 0x66, 0x6d, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -251,6 +453,9 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ImporterClient interface {
+	RequestNewColumn(ctx context.Context, in *ColumnName, opts ...grpc.CallOption) (*ColumnId, error)
+	GetColumns(ctx context.Context, in *Void, opts ...grpc.CallOption) (*ColumnList, error)
+	GetColumnByName(ctx context.Context, in *ColumnName, opts ...grpc.CallOption) (*ColumnId, error)
 	IngestPageData(ctx context.Context, opts ...grpc.CallOption) (Importer_IngestPageDataClient, error)
 	IngestTitleData(ctx context.Context, opts ...grpc.CallOption) (Importer_IngestTitleDataClient, error)
 	IngestPageNameData(ctx context.Context, opts ...grpc.CallOption) (Importer_IngestPageNameDataClient, error)
@@ -262,6 +467,33 @@ type importerClient struct {
 
 func NewImporterClient(cc *grpc.ClientConn) ImporterClient {
 	return &importerClient{cc}
+}
+
+func (c *importerClient) RequestNewColumn(ctx context.Context, in *ColumnName, opts ...grpc.CallOption) (*ColumnId, error) {
+	out := new(ColumnId)
+	err := c.cc.Invoke(ctx, "/Importer/requestNewColumn", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *importerClient) GetColumns(ctx context.Context, in *Void, opts ...grpc.CallOption) (*ColumnList, error) {
+	out := new(ColumnList)
+	err := c.cc.Invoke(ctx, "/Importer/getColumns", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *importerClient) GetColumnByName(ctx context.Context, in *ColumnName, opts ...grpc.CallOption) (*ColumnId, error) {
+	out := new(ColumnId)
+	err := c.cc.Invoke(ctx, "/Importer/getColumnByName", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *importerClient) IngestPageData(ctx context.Context, opts ...grpc.CallOption) (Importer_IngestPageDataClient, error) {
@@ -368,6 +600,9 @@ func (x *importerIngestPageNameDataClient) CloseAndRecv() (*Success, error) {
 
 // ImporterServer is the server API for Importer service.
 type ImporterServer interface {
+	RequestNewColumn(context.Context, *ColumnName) (*ColumnId, error)
+	GetColumns(context.Context, *Void) (*ColumnList, error)
+	GetColumnByName(context.Context, *ColumnName) (*ColumnId, error)
 	IngestPageData(Importer_IngestPageDataServer) error
 	IngestTitleData(Importer_IngestTitleDataServer) error
 	IngestPageNameData(Importer_IngestPageNameDataServer) error
@@ -375,6 +610,60 @@ type ImporterServer interface {
 
 func RegisterImporterServer(s *grpc.Server, srv ImporterServer) {
 	s.RegisterService(&_Importer_serviceDesc, srv)
+}
+
+func _Importer_RequestNewColumn_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ColumnName)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ImporterServer).RequestNewColumn(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Importer/RequestNewColumn",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ImporterServer).RequestNewColumn(ctx, req.(*ColumnName))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Importer_GetColumns_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Void)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ImporterServer).GetColumns(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Importer/GetColumns",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ImporterServer).GetColumns(ctx, req.(*Void))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Importer_GetColumnByName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ColumnName)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ImporterServer).GetColumnByName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Importer/GetColumnByName",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ImporterServer).GetColumnByName(ctx, req.(*ColumnName))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Importer_IngestPageData_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -458,7 +747,20 @@ func (x *importerIngestPageNameDataServer) Recv() (*PageNameData, error) {
 var _Importer_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "Importer",
 	HandlerType: (*ImporterServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "requestNewColumn",
+			Handler:    _Importer_RequestNewColumn_Handler,
+		},
+		{
+			MethodName: "getColumns",
+			Handler:    _Importer_GetColumns_Handler,
+		},
+		{
+			MethodName: "getColumnByName",
+			Handler:    _Importer_GetColumnByName_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "ingestPageData",

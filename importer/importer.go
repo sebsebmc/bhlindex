@@ -18,7 +18,7 @@ type bhlServer struct{}
 
 func (bhlServer) IngestPageData(srv protob.Importer_IngestPageDataServer) error {
 	ctx := srv.Context()
-	stmt, err := db.Prepare("INSERT INTO page_imports WHERE page_id=? and data = ?")
+	stmt, err := db.Prepare("INSERT INTO page_imports (page_id, $3) VALUES ($1, $2)")
 	if err != nil {
 		return err
 	}
@@ -48,9 +48,10 @@ func (bhlServer) IngestPageData(srv protob.Importer_IngestPageDataServer) error 
 	return nil
 }
 
-func (bhlServer) IngestTitleData(protob.Importer_IngestTitleDataServer) error {
+// Bidirectional stream for ingesting data to be joined to a title id.
+func (bhlServer) IngestTitleData(srv protob.Importer_IngestTitleDataServer) error {
 	ctx := srv.Context()
-	stmt, err := db.Prepare("INSERT INTO title_imports WHERE title_id=? and data = ?")
+	stmt, err := db.Prepare("INSERT INTO title_imports (title_id, $3) VALUES ($1, $2)")
 	if err != nil {
 		return err
 	}
@@ -80,36 +81,8 @@ func (bhlServer) IngestTitleData(protob.Importer_IngestTitleDataServer) error {
 	return nil
 }
 
-func (bhlServer) IngestPageNameData(protob.Importer_IngestPageNameDataServer) error {
-	ctx := srv.Context()
-	stmt, err := db.Prepare("INSERT INTO page_name_imports WHERE page_id=? and data = ?")
-	if err != nil {
-		return err
-	}
-	defer stmt.Close()
-
-	for {
-		select {
-		case <-ctx.Done():
-			return ctx.Err()
-		default:
-		}
-		req, err := srv.Recv()
-		if err != io.EOF {
-			return nil
-		}
-		if err != nil {
-			return err
-		}
-
-		id := req.Id
-		json := req.JsonData
-		_, err = stmt.Exec(id, json)
-		if err != nil {
-			return err
-		}
-	}
-	return nil
+func (bhlServer) IngestPageNameData(srv protob.Importer_IngestPageNameDataServer) error {
+    return fmt.Errorf("Not Implemented!")
 }
 
 func initDB() *sql.DB {

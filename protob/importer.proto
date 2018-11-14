@@ -1,29 +1,51 @@
 syntax = "proto3";
 option go_package = "protob";
+import "protob.proto";
 
 service Importer{
+    rpc requestNewColumn(ColumnName) returns (ColumnId) {}
+    rpc getColumns(protob.Void) returns (ColumnList) {}
+    rpc getColumnByName(ColumnName) returns (ColumnId) {}
     rpc ingestPageData (stream PageData) returns (Success) {}
     rpc ingestTitleData (stream TitleData) returns (Success) {}
     rpc ingestPageNameData (stream PageNameData) returns (Success) {}
 }
 
+message ColumnName {
+    string name = 1;
+}
+
+message ColumnId {
+    int32 id = 1;
+}
+
+message ColumnList {
+    message ColumnInfo {
+        ColumnId id = 1;
+        ColumnName name = 2;
+    }
+    repeated ColumnInfo columns = 1;
+}
+
 message PageData {
     string id = 1;
     string jsonData = 2;
+    ColumnId col = 3;
 }
 
 message TitleData {
     int32 id = 1;
     int32 jsonData = 2;
+    ColumnId col = 3;
 }
 
 message PageNameData {
     string pageId = 1; 
     int32 name_start = 2;
     string jsonData = 3; 
+    ColumnId col = 4;
 }
 
 message Success {
     bool successful = 1;
 }
-
