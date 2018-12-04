@@ -18,11 +18,6 @@ type bhlServer struct{}
 
 func (bhlServer) IngestPageData(srv protob.Importer_IngestPageDataServer) error {
 	ctx := srv.Context()
-	stmt, err := db.Prepare("INSERT INTO page_imports (page_id, $3) VALUES ($1, $2)")
-	if err != nil {
-		return err
-	}
-	defer stmt.Close()
 
 	for {
 		select {
@@ -40,7 +35,10 @@ func (bhlServer) IngestPageData(srv protob.Importer_IngestPageDataServer) error 
 
 		id := req.Id
 		json := req.JsonData
-		_, err = stmt.Exec(id, json)
+		col := req.Col.Id
+		//Cannot use a prepared statement because we are dynamically adding the column name
+	    query := fmt.Sprintf("INSERT INTO page_imports (page_id, import_col_%s) VALUES ($1, $2)", col)
+		_, err = db.Exec(query, id, json)
 		if err != nil {
 			return err
 		}
@@ -51,11 +49,6 @@ func (bhlServer) IngestPageData(srv protob.Importer_IngestPageDataServer) error 
 // Bidirectional stream for ingesting data to be joined to a title id.
 func (bhlServer) IngestTitleData(srv protob.Importer_IngestTitleDataServer) error {
 	ctx := srv.Context()
-	stmt, err := db.Prepare("INSERT INTO title_imports (title_id, $3) VALUES ($1, $2)")
-	if err != nil {
-		return err
-	}
-	defer stmt.Close()
 
 	for {
 		select {
@@ -73,7 +66,10 @@ func (bhlServer) IngestTitleData(srv protob.Importer_IngestTitleDataServer) erro
 
 		id := req.Id
 		json := req.JsonData
-		_, err = stmt.Exec(id, json)
+		col := req.Col.Id
+		//Cannot use a prepared statement because we are dynamically adding the column name
+    	query := fmt.Sprintf("INSERT INTO title_imports (title_id, import_col_%s) VALUES ($1, $2)", col)
+		_, err = db.Exec(query, id, json)
 		if err != nil {
 			return err
 		}
