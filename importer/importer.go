@@ -17,29 +17,25 @@ var db *sql.DB
 type bhlServer struct{}
 
 func (bhlServer) IngestPageData(srv protob.Importer_IngestPageDataServer) error {
-	ctx := srv.Context()
 
 	for {
-		select {
-		case <-ctx.Done():
-			return ctx.Err()
-		default:
-		}
 		req, err := srv.Recv()
-		if err != io.EOF {
-			return nil
+		if err == io.EOF {
+    		srv.SendAndClose(&protob.Success{Successful:true})
+    		return nil
 		}
 		if err != nil {
 			return err
 		}
 
-		id := req.Id
-		json := req.JsonData
-		col := req.Col.Id
+		id := req.GetId()
+		json := req.GetJsonData()
+		col := req.GetCol().GetId()
 		//Cannot use a prepared statement because we are dynamically adding the column name
-	    query := fmt.Sprintf("INSERT INTO page_imports (page_id, import_col_%s) VALUES ($1, $2)", col)
+	    query := fmt.Sprintf("INSERT INTO page_imports (page_id, import_col_%d) VALUES ($1, $2) ON CONFLICT (page_id) DO UPDATE SET import_col_%d = EXCLUDED.import_col_%d;", col, col, col)
 		_, err = db.Exec(query, id, json)
 		if err != nil {
+    		log.Printf("Error inserting: %v", err)
 			return err
 		}
 	}
@@ -48,27 +44,21 @@ func (bhlServer) IngestPageData(srv protob.Importer_IngestPageDataServer) error 
 
 // Bidirectional stream for ingesting data to be joined to a title id.
 func (bhlServer) IngestTitleData(srv protob.Importer_IngestTitleDataServer) error {
-	ctx := srv.Context()
-
 	for {
-		select {
-		case <-ctx.Done():
-			return ctx.Err()
-		default:
-		}
 		req, err := srv.Recv()
-		if err != io.EOF {
-			return nil
+		if err == io.EOF {
+    		srv.SendAndClose(&protob.Success{Successful:true})
+    		return nil
 		}
 		if err != nil {
 			return err
 		}
 
-		id := req.Id
-		json := req.JsonData
-		col := req.Col.Id
+		id := req.GetId()
+		json := req.GetJsonData()
+		col := req.GetCol().GetId()
 		//Cannot use a prepared statement because we are dynamically adding the column name
-    	query := fmt.Sprintf("INSERT INTO title_imports (title_id, import_col_%s) VALUES ($1, $2)", col)
+    	query := fmt.Sprintf("INSERT INTO title_imports (title_id, import_col_%d) VALUES ($1, $2) ON CONFLICT (title_id) DO UPDATE SET import_col_%d = EXCLUDED.import_col_%d;", col, col, col)
 		_, err = db.Exec(query, id, json)
 		if err != nil {
 			return err
